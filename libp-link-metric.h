@@ -8,9 +8,13 @@
 #ifndef LIBP_LINK_METRIC_H
 #define LIBP_LINK_METRIC_H
 
+#define LIBP_LINK_METRIC_UNIT           8
+
 struct libp_link_metric {
   uint32_t children_accumulator;
   uint8_t num_children;
+  uint32_t etx_accumulator;
+  uint8_t num_estimates;
 };
 
 /**

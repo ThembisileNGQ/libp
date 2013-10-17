@@ -74,16 +74,16 @@ PROCESS_THREAD(example_libp_process, ev, data)
 
     if(etimer_expired(&et)) {
 
-      /*static rimeaddr_t oldparent;
+      static rimeaddr_t oldparent;
       const rimeaddr_t *parent;
 
       printf("Sending\n");
       packetbuf_clear();
       packetbuf_set_datalen(sprintf(packetbuf_dataptr(),
 				  "%s", "Hello") + 1);
-      libp_send(&tc, 15);
+      libp_send(&lc, 15);
 
-      parent = libp_parent(&tc);
+      parent = libp_parent(&lc);
       if(!rimeaddr_cmp(parent, &oldparent)) {
         if(!rimeaddr_cmp(&oldparent, &rimeaddr_null)) {
           printf("#L %d 0\n", oldparent.u8[0]);
@@ -93,7 +93,7 @@ PROCESS_THREAD(example_libp_process, ev, data)
         }
         rimeaddr_copy(&oldparent, parent);
       }
-    */}
+    }
 
   }
 

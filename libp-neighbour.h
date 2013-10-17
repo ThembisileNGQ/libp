@@ -47,15 +47,15 @@ void libp_neighbour_list_purge(struct libp_neighbour_list *neighbor_list);
 void libp_neighbour_update_rtmetric(struct libp_neighbour *n,
 
                                       uint16_t rtmetric);
-/*void libp_neighbour_tx(struct libp_neighbour *n, uint16_t num_tx);
+void libp_neighbour_tx(struct libp_neighbour *n, uint16_t num_tx);
 void libp_neighbour_rx(struct libp_neighbour *n);
 void libp_neighbour_tx_fail(struct libp_neighbour *n, uint16_t num_tx);
 void libp_neighbour_set_congested(struct libp_neighbour *n);
 int libp_neighbour_is_congested(struct libp_neighbour *n);
-*/
 
-uint16_t libp_neighbour_link_estimate(struct libp_neighbour *n);
-uint16_t libp_neighbour_rtmetric_link_estimate(struct libp_neighbour *n);
+
+uint16_t libp_neighbour_link_metric(struct libp_neighbour *n);
+uint16_t libp_neighbour_rtmetric_link_metric(struct libp_neighbour *n);
 uint16_t libp_neighbour_rtmetric(struct libp_neighbour *n);
 
 #endif

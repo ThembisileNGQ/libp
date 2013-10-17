@@ -67,5 +67,6 @@ void libp_set_beacon_period(struct libp_conn *c, clock_time_t period);
 
 /*void libp_print_stats(void);*/
 
+#define LIBP_MAX_DEPTH (LIBP_LINK_METRIC_UNIT * 64 - 1)
 
 #endif
