@@ -35,6 +35,7 @@ struct libp_conn {
   struct ctimer beacon_timer;
   clock_time_t beacon_period;
 
+
   struct ctimer proactive_probing_timer;
 
   rimeaddr_t parent, current_parent;
@@ -43,6 +44,7 @@ struct libp_conn {
   uint8_t sending, transmissions, max_rexmits;
   uint8_t eseqno;
   uint8_t is_router;
+  uint8_t is_sink;
 
   clock_time_t send_time;
 };

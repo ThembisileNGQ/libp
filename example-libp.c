@@ -17,6 +17,7 @@
 
 #include <stdio.h>
 
+
 #define BEACONING_PERIOD 30
 #define CHANNEL 130
 
@@ -63,7 +64,7 @@ PROCESS_THREAD(example_libp_process, ev, data)
   while(1) {
 
     /* Send a packet every 30 seconds. */
-   /* if(etimer_expired(&periodic)) {
+    if(etimer_expired(&periodic)) {
       etimer_set(&periodic, CLOCK_SECOND * 30);
       etimer_set(&et, random_rand() % (CLOCK_SECOND * 30));
     }
@@ -72,7 +73,8 @@ PROCESS_THREAD(example_libp_process, ev, data)
 
 
     if(etimer_expired(&et)) {
-      static rimeaddr_t oldparent;
+
+      /*static rimeaddr_t oldparent;
       const rimeaddr_t *parent;
 
       printf("Sending\n");
@@ -91,7 +93,7 @@ PROCESS_THREAD(example_libp_process, ev, data)
         }
         rimeaddr_copy(&oldparent, parent);
       }
-    }*/
+    */}
 
   }
 
