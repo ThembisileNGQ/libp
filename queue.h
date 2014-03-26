@@ -46,7 +46,7 @@ void queue_push(struct Node * node);
  * \returns    The head of the queue.
  *             This function pops the top off the queue
  */
-struct Item * queue_dequeue();
+int queue_dequeue();
 
 /**
  * \brief      Getter for queue size

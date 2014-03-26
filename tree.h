@@ -59,12 +59,11 @@ void change_node_parent(int id, int new_parent);
 
 /**
  * \brief      starts the bfs process
- * \param
- *      v      The vertex to begin the bfs from
+
  *
  *             Starts a breadth first search
  */
-void tree_bfs(struct Node * v);
+void tree_bfs();
 
 /**
  * \brief      bfs process
@@ -83,5 +82,7 @@ void bfs(struct Node * v);
  *             Returns the root node of the tree
  */
 struct Node * get_root();
+
+void clear_tree();
 
 #endif

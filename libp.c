@@ -1331,3 +1331,12 @@ libp_purge(struct libp_conn *c)
   }
   rimeaddr_copy(&c->parent, &rimeaddr_null);
 }
+
+int get_libp_metric(struct libp_conn *c)
+{
+    struct libp_neighbour *parent;
+    parent = libp_neighbour_list_find(&c->neighbour_list, &c->current_parent);
+    if(parent == NULL)
+        return 0;
+    return parent->lm.num_estimates;
+}
