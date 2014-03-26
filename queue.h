@@ -13,11 +13,12 @@
 /**
  * \struct Item
  * \properties:
- *	node - the node		
+ *	node - the node
  *      metric - next item attached to this node
  */
 
-struct Item{
+struct Item
+{
     struct Node *node;
     struct Item *next;
 };
@@ -36,7 +37,7 @@ void queue_init();
 /**
  * \brief      adds node to queue
  * \param node The node that needs to be pushed into the back of the queue
- *             
+ *
  *	       The node is added to the back of the queue and the tail is set accordingly
  */
 void queue_push(struct Node * node);

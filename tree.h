@@ -29,7 +29,7 @@ void tree_init();
 /**
  * \brief      Initialize the queue
  * \param
- *      parent the parent 
+ *      parent the parent
  *      metric the metric/weight of the node with id param:id
  *      id     the id of the node
  *
@@ -83,6 +83,13 @@ void bfs(struct Node * v);
  */
 struct Node * get_root();
 
+/**
+ * \brief      Clears the tree of all nodes
+ * \return
+ *      root   The root node of the tree
+ *
+ *             Clears the tree of all nodes and free()'s the space created for the node structs
+ */
 void clear_tree();
 
 #endif

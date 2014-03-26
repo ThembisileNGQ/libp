@@ -12,14 +12,15 @@
 /**
  * \struct Node
  * \properties:
- *	id - identity		
+ *	id - identity
  *      metric - node weight
  *      firstchild - the first child of the node/vertex
  *      nextsibling - the immediate sibling of the node/vertex
  */
 
-struct Node{
-    int id; 
+struct Node
+{
+    int id;
     int metric;
     struct Node *firstchild;
     struct Node *nextsibling;
