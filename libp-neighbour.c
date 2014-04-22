@@ -172,6 +172,7 @@ int libp_neighbour_list_add(struct libp_neighbour_list *neighbours_list,const ri
     n->rtmetric = nrtmetric;
     libp_link_metric_new(&n->lm);
     n->lm_age = 0;
+    n->penalty = 0;
     return 1;
   }
   return 0;

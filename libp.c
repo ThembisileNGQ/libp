@@ -38,6 +38,9 @@
 #define ACK_FLAGS_PARENT_REMOVED        0xa
 #define ACK_FLAGS_RTMETRIC_NEEDS_UPDATE 0x10
 
+#define SEC_FLAGS_NODE_IGNORE           0x80
+
+
 /* The recent_packets list holds the sequence number, the originator,
    and the connection for packets that have been recently
    forwarded. This list is maintained to avoid forwarding duplicate

@@ -29,7 +29,7 @@ static int is_sink = 0;
 /*---------------------------------------------------------------------------*/
 PROCESS(example_libp_process, "Test LIBP process");
 PROCESS(gateway_monitoring_process, "Gateway Monitoring Process");
-AUTOSTART_PROCESSES(&example_libp_process, &gateway_monitoring_process);
+AUTOSTART_PROCESSES(&example_libp_process);
 /*---------------------------------------------------------------------------*/
 static void
 recv(const rimeaddr_t *originator, uint8_t seqno, uint8_t hops)
@@ -44,34 +44,6 @@ recv(const rimeaddr_t *originator, uint8_t seqno, uint8_t hops)
 static const struct collect_callbacks callbacks = { recv };
 /*---------------------------------------------------------------------------*/
 
-PROCESS_THREAD(gateway_monitoring_process)
-{
-    static struct etimer monitor_timer;
-    static struct etimer wait_timer;
-    //int monitoring
-    PROCESS_BEGIN();
-
-    /* Allow some time for system to detect weather it is a gateway or not. */
-    etimer_set(&wait_timer, 60 * 2 * CLOCK_SECOND);
-    PROCESS_WAIT_UNTIL(etimer_expired(&wait_timer));
-
-    if(is_sink == 0)
-    {
-        PROCESS_END();
-    }
-
-    while(1)
-    {
-        //monitoring loop
-
-        /* Monitor every 20 seconds */
-        etimer_set(&wait_timer, CLOCK_SECOND * 20 + random_rand() % (CLOCK_SECOND * 20));
-
-        PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&wait_timer));
-
-        //monitor
-    }
-}
 
 PROCESS_THREAD(example_libp_process, ev, data)
 {
@@ -91,6 +63,7 @@ PROCESS_THREAD(example_libp_process, ev, data)
         is_sink = 1;
         libp_set_beacon_period(&lc, period);
         tree_init(); //only gateway needs to use the tree methods
+        process_start(&gateway_monitoring_process, NULL);
 
     }
 
@@ -123,7 +96,7 @@ PROCESS_THREAD(example_libp_process, ev, data)
             packetbuf_set_datalen(sprintf(packetbuf_dataptr(),
                                           "%s %d", "Hello", (int)parent->u8[0]) + 1);
             libp_send(&lc, 15);
-            printf("Parent %d link metric %d \n\n", (int)parent->u8[0], get_libp_metric(&lc));
+            
             parent = libp_parent(&lc);
             if(!rimeaddr_cmp(parent, &oldparent))
             {
@@ -144,3 +117,32 @@ PROCESS_THREAD(example_libp_process, ev, data)
     PROCESS_END();
 }
 /*---------------------------------------------------------------------------*/
+
+PROCESS_THREAD(gateway_monitoring_process, ev, data)
+{
+    static struct etimer monitor_timer;
+    static struct etimer wait_timer;
+    //xint monitoring
+    PROCESS_BEGIN();
+
+    //Allow some time for system to detect weather it is a gateway or not.
+    etimer_set(&wait_timer, 60 * 2 * CLOCK_SECOND);
+    PROCESS_WAIT_UNTIL(etimer_expired(&wait_timer));
+
+    //If the node is not a sink, turn off this process.
+    printf("Hi from sink thread\n\n");
+
+    while(1)
+    {
+        //monitoring loop
+
+        // Monitor every 20 seconds
+        etimer_set(&monitor_timer, CLOCK_SECOND * 20 + random_rand() % (CLOCK_SECOND * 20));
+
+        PROCESS_WAIT_EVENT_UNTIL(etimer_expired(&monitor_timer));
+
+        //monitor
+    }
+
+    PROCESS_END();
+}

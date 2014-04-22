@@ -23,6 +23,7 @@ struct libp_neighbour {
   uint16_t rtmetric;
   uint16_t age;
   uint16_t lm_age;
+  uint16_t penalty;
   struct libp_link_metric lm;
   struct timer congested_timer;
 };
